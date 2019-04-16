@@ -1,0 +1,84 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.sling.distribution.journal.messages;
+
+message PackageMessage {
+   enum ReqType {
+       ADD = 0;
+       DELETE = 1;
+       TEST = 2;
+   }
+   required string pubSlingId = 1;      // Publisher agent Sling identifier
+   //required int32 maxRetries = 9;
+   required ReqType reqType = 4;      // The request type
+   required string pkgId = 3;           // Content package identifier
+   required string pkgType = 11;        // The package type
+   optional int64 pkgLength = 5;
+   optional bytes pkgBinary = 6;        // The content package binary. Either the pkgBinary or the pkgBinaryRef field MUST be set.
+   optional string pkgBinaryRef = 10;   // The reference to the content binary in the shared blob store.  Either the pkgBinary or the pkgBinaryRef field MUST be set.
+   optional string pubAgentName = 2;    // Publisher agent name
+   optional string userId = 12;
+   repeated string paths = 7;
+   repeated string deepPaths = 8;
+}
+
+message PackageStatusMessage {
+   enum Status {
+       REMOVED_FAILED = 0;                       // The package has been removed automatically after failing every retry attempts
+       REMOVED = 1;                              // The package has been removed explicitly
+       IMPORTED = 2;                             // The package has been imported
+   }
+   required string subSlingId = 1;               // Subscriber agent Sling identifier
+   required string subAgentName = 2;             // Subscriber agent name
+   required string pubAgentName = 3;             // Publisher agent name
+   required int64 offset = 4;                    // The offset of the package for which the status is given
+   required Status status = 5;                   // The package status
+}
+
+
+message SubscriberState {
+   required string pubAgentName = 1;    // Publisher agent name
+   required int64 offset = 2;           // Last processed offset on the Subscriber agent
+   optional int32 retries = 3;          // Nb of retries for the current offset on the Subscriber agent
+}
+
+message SubscriberConfiguration {
+   required bool editable = 1;
+   required int32 maxRetries = 2;       // The max number of retry attempts to process this package. A value smaller than zero indicates an infinite number of retry attempts. A value greater or equal to zero indicates a specific number of retry attempts.
+}
+
+message DiscoveryMessage {
+   required string subSlingId = 1;               // Subscriber agent Sling identifier
+   required string subAgentName = 2;             // Subscriber agent name
+   repeated SubscriberState subscriberState = 3;
+   required SubscriberConfiguration subscriberConfiguration = 4;
+}
+
+message ClearCommand {
+   required int64 offset = 1;
+}
+
+message CommandMessage {
+   required string subSlingId = 1;               // Subscriber agent Sling identifier
+   required string subAgentName = 2;             // Subscriber agent name
+   optional ClearCommand clearCommand = 3;
+}
+
+message PingMessage {
+}
