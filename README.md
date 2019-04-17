@@ -1,4 +1,7 @@
-org.apache.sling.distribution.journal.messages
-===============================================
+[<img src="https://sling.apache.org/res/logos/sling.png"/>](https://sling.apache.org)
 
-Project containing the [Protocol Buffers](https://developers.google.com/protocol-buffers) message definition for the `distribution.journal` module.
+# Apache Sling Journal based Content Distribution - Messages
+
+This module is part of the [Apache Sling](https://sling.apache.org) project.
+
+This module provides the definition of messages exchanged by the [Apache Sling Journal based Content Distribution - Core](https://github.com/apache/sling-org-apache-sling-distribution-journal) module.
