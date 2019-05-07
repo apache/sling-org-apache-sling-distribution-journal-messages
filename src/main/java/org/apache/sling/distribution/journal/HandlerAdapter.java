@@ -18,43 +18,29 @@
  */
 package org.apache.sling.distribution.journal;
 
-import java.lang.reflect.Method;
+import com.google.protobuf.Any;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.ExtensionRegistryLite;
-
-public class HandlerAdapter<T> {
+public class HandlerAdapter<T extends Message> {
     private final MessageHandler<T> handler;
-    private final Method method;
-    private final ExtensionRegistryLite registry;
     private final Class<T> type;
     
     public HandlerAdapter(Class<T> type, MessageHandler<T> handler) {
         this.type = type;
         this.handler = handler;
-        try {
-            method = type.getMethod("parseFrom", ByteString.class, ExtensionRegistryLite.class);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
-        registry = ExtensionRegistryLite.newInstance();
     }
 
-    public static <T> HandlerAdapter<T> create(Class<T> type, MessageHandler<T> handler) {
+    public static <T extends Message> HandlerAdapter<T> create(Class<T> type, MessageHandler<T> handler) {
         return new HandlerAdapter<>(type, handler);
     }
     
-    @SuppressWarnings("unchecked")
-    private T parseFrom(ByteString payloadBytes) throws Exception {
-        return (T) method.invoke(null, payloadBytes, registry);
+    public void handle(MessageInfo info, Any any) throws InvalidProtocolBufferException { 
+        T message = any.unpack(type);
+        this.handler.handle(info, message);
     }
     
-    public void handle(MessageInfo info, ByteString payloadBytes) throws Exception {
-        T payload = parseFrom(payloadBytes);
-        handler.handle(info, payload);
-    }
-
-    public Class<?> getType() {
+    public Class<? extends Message> getType() {
         return type;
     }
 

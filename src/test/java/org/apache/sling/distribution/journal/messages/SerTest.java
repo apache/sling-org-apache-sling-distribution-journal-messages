@@ -18,45 +18,29 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import static org.apache.sling.distribution.journal.messages.Messages.SubscriberConfiguration;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import java.lang.reflect.Method;
-
-import org.junit.Test;
-
 import org.apache.sling.distribution.journal.messages.Messages.DiscoveryMessage;
 import org.apache.sling.distribution.journal.messages.Messages.DiscoveryMessageOrBuilder;
+import org.apache.sling.distribution.journal.messages.Messages.SubscriberConfiguration;
 import org.apache.sling.distribution.journal.messages.Messages.SubscriberState;
 import org.apache.sling.distribution.journal.messages.Messages.SubscriberStateOrBuilder;
+import org.junit.Test;
+
+import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.ExtensionRegistryLite;
-import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.InvalidProtocolBufferException;
 
 public class SerTest {
 
     @Test
-    public void test() throws InvalidProtocolBufferException {
+    public void testSerialize() throws Exception {
         DiscoveryMessage discoveryMsg = createMessage();
-        byte[] messageBytes = discoveryMsg.toByteArray();
+        Any anyOut = Any.pack(discoveryMsg);
+        ByteString byteString = anyOut.toByteString();
 
-        ExtensionRegistryLite registry = ExtensionRegistryLite.newInstance();
-        DiscoveryMessageOrBuilder messageIn = DiscoveryMessage.parseFrom(messageBytes, registry);
-        checkMessage(messageIn);
-
-    }
-
-    @Test
-    public void testFromClass() throws Exception {
-        DiscoveryMessage discoveryMsg = createMessage();
-        ByteString byteString = discoveryMsg.toByteString();
-        
-        ExtensionRegistryLite registry = ExtensionRegistryLite.newInstance();
-        Class<? extends GeneratedMessage> type = DiscoveryMessage.class;
-        Method method = type.getMethod("parseFrom", ByteString.class, ExtensionRegistryLite.class);
-        DiscoveryMessage messageIn = (DiscoveryMessage) method.invoke(null, byteString, registry);
+        Any anyIn = Any.parseFrom(byteString);
+        DiscoveryMessage messageIn = anyIn.unpack(DiscoveryMessage.class);
         checkMessage(messageIn);
     }
 
