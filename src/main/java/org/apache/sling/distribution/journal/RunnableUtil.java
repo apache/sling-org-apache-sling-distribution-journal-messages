@@ -20,13 +20,11 @@ package org.apache.sling.distribution.journal;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @ParametersAreNonnullByDefault
 public class RunnableUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RunnableUtil.class);
+    private RunnableUtil() {
+    }
 
     public static Thread startBackgroundThread(Runnable runnable, String threadName) {
         Thread thread = new Thread(runnable, threadName);
