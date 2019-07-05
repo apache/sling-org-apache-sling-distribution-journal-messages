@@ -41,6 +41,7 @@
 
     <properties>
         <sling.java.version>8</sling.java.version>
+        <surefire.plugin.version>2.22.2</surefire.plugin.version>
     </properties>
 
     <scm>
