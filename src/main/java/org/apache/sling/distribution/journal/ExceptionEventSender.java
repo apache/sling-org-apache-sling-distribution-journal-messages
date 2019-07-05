@@ -33,6 +33,9 @@ import org.osgi.service.event.EventAdmin;
 public class ExceptionEventSender {
 
     public static final String ERROR_TOPIC = "org/apache/sling/distribution/journal/errors";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_TYPE = "type";
+    
     private final EventAdmin eventAdmin;
 
     public ExceptionEventSender(@Nullable EventAdmin eventAdmin) {
@@ -41,8 +44,8 @@ public class ExceptionEventSender {
 
     private Event createErrorEvent(Exception e) {
         Map<String, String> props = new HashMap<>();
-        props.put("type", e.getClass().getName());
-        props.put("message", e.getMessage());
+        props.put(KEY_TYPE, e.getClass().getName());
+        props.put(KEY_MESSAGE, e.getMessage());
         return new Event(ERROR_TOPIC, props);
     }
 
