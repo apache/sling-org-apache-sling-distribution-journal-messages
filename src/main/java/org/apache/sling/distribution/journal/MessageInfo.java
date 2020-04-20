@@ -27,4 +27,8 @@ public interface MessageInfo {
     long getOffset();
 
     long getCreateTime();
+    
+    String getImsOrg();
+    
+    String getSource();
 }
