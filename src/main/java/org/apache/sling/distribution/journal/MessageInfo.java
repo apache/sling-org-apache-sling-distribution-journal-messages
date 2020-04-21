@@ -28,7 +28,7 @@ public interface MessageInfo {
 
     long getCreateTime();
     
-    String getImsOrg();
+    String getOrg();
     
     String getSource();
 }
