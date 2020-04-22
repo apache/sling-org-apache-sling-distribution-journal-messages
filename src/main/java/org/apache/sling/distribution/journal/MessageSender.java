@@ -18,10 +18,14 @@
  */
 package org.apache.sling.distribution.journal;
 
+import java.util.Map;
+
 import com.google.protobuf.GeneratedMessage;
 
 public interface MessageSender<T extends GeneratedMessage> {
 
-	void send(String topic, T payload) throws MessagingException;
+    void send(String topic, T payload) throws MessagingException;
+    
+    void send(String topic, T payload, Map<String, String> properties) throws MessagingException;
 
 }

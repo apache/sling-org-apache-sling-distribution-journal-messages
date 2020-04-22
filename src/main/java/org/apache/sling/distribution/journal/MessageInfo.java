@@ -18,6 +18,8 @@
  */
 package org.apache.sling.distribution.journal;
 
+import java.util.Map;
+
 public interface MessageInfo {
 
     String getTopic();
@@ -28,7 +30,5 @@ public interface MessageInfo {
 
     long getCreateTime();
     
-    String getOrg();
-    
-    String getSource();
+    Map<String, String> getProps();
 }
