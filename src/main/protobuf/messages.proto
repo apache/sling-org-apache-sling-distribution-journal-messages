@@ -78,6 +78,7 @@ message CommandMessage {
    required string subSlingId = 1;               // Subscriber agent Sling identifier
    required string subAgentName = 2;             // Subscriber agent name
    optional ClearCommand clearCommand = 3;
+   optional string pubAgentName = 4;
 }
 
 message PingMessage {
