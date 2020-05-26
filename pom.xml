@@ -34,7 +34,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>org.apache.sling.distribution.journal.messages</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.7-SNAPSHOT</version>
 
     <name>Apache Sling Journal based Content Distribution - Messages bundle</name>
     <description>Implementation of the messages to support Apache Sling Content Distribution on top of an append-only persisted log</description>
@@ -47,7 +47,7 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-org-apache-sling-distribution-journal-messages.git</url>
-      <tag>org.apache.sling.distribution.journal.messages-0.1.6</tag>
+      <tag>org.apache.sling.distribution.journal.messages-0.1.2</tag>
   </scm>
 
     <!-- ======================================================================= -->
