@@ -16,10 +16,40 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.distribution.journal;
+package org.apache.sling.distribution.journal.messages;
 
-public interface JsonMessageSender<T> {
+import java.util.ArrayList;
+import java.util.List;
 
-	void send(String topic, T payload);
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PackageMessage {
+    String pubSlingId;
+    ReqType reqType;
+    String pkgId;
+    String pkgType;
+    long pkgLength;
+    byte[] pkgBinary;
+    String pkgBinaryRef;
+    String pubAgentName;
+    String userId;
+    
+    @Builder.Default
+    List<String> paths = new ArrayList<>();
+    
+    @Builder.Default
+    List<String> deepPaths = new ArrayList<>();
+    
+    public enum ReqType {
+        ADD,
+        DELETE,
+        TEST;
+    }
 }

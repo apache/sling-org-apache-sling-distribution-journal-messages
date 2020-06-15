@@ -16,6 +16,24 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.0.0")
 package org.apache.sling.distribution.journal.messages;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class SubscriberConfig {
+    boolean editable;
+
+    /**
+     * The max number of retry attempts to process this package. A value smaller
+     * than zero indicates an infinite number of retry attempts. A value greater or
+     * equal to zero indicates a specific number of retry attempts. 
+     */
+    int maxRetries;
+}

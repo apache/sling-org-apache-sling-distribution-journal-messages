@@ -19,33 +19,19 @@
 package org.apache.sling.distribution.journal;
 
 import java.io.Closeable;
-import java.util.function.Consumer;
-
-import com.google.protobuf.GeneratedMessage;
 
 public interface MessagingProvider {
 
-    <T extends GeneratedMessage> MessageSender<T> createSender();
-    
-    /**
-     * Create a sender for a fixed topic
-     * 
-     * @param <T>
-     * @param topic
-     * @return
-     */
-    default <T extends GeneratedMessage> Consumer<T> createSender(String topic) {
-        MessageSender<GeneratedMessage> sender = createSender();
-        return payload -> sender.send(topic, payload);
+    <T> MessageSender<T> createSender(String topic);
+
+    default Closeable createPoller(
+            String topicName,
+            Reset reset,
+            HandlerAdapter<?> ... adapters) {
+        return createPoller(topicName, reset, null, adapters);
     }
 
-    <T> Closeable createPoller(String topicName, Reset reset, HandlerAdapter<?>... adapters);
-
     Closeable createPoller(String topicName, Reset reset, String assign, HandlerAdapter<?>... adapters);
-
-    <T> JsonMessageSender<T> createJsonSender();
-
-    <T> Closeable createJsonPoller(String topicName, Reset reset, MessageHandler<T> handler, Class<T> type);
 
     void assertTopic(String topic) throws MessagingException;
 

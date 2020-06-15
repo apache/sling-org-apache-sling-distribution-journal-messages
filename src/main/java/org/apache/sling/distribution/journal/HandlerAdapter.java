@@ -18,40 +18,17 @@
  */
 package org.apache.sling.distribution.journal;
 
-import java.lang.reflect.Method;
-
-import com.google.protobuf.ByteString;
-import com.google.protobuf.ExtensionRegistryLite;
-
 public class HandlerAdapter<T> {
-    private final MessageHandler<T> handler;
-    private final Method method;
-    private final ExtensionRegistryLite registry;
     private final Class<T> type;
+    private final MessageHandler<T> handler;
     
-    public HandlerAdapter(Class<T> type, MessageHandler<T> handler) {
-        this.type = type;
-        this.handler = handler;
-        try {
-            method = type.getMethod("parseFrom", ByteString.class, ExtensionRegistryLite.class);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
-        registry = ExtensionRegistryLite.newInstance();
-    }
-
     public static <T> HandlerAdapter<T> create(Class<T> type, MessageHandler<T> handler) {
         return new HandlerAdapter<>(type, handler);
     }
     
-    @SuppressWarnings("unchecked")
-    private T parseFrom(ByteString payloadBytes) throws Exception {
-        return (T) method.invoke(null, payloadBytes, registry);
-    }
-    
-    public void handle(MessageInfo info, ByteString payloadBytes) throws Exception {
-        T payload = parseFrom(payloadBytes);
-        handler.handle(info, payload);
+    private HandlerAdapter(Class<T> type, MessageHandler<T> handler) {
+        this.type = type;
+        this.handler = handler;
     }
 
     public Class<?> getType() {
@@ -60,5 +37,10 @@ public class HandlerAdapter<T> {
 
     public MessageHandler<T> getHandler() {
         return this.handler;
+    }
+    
+    @Override
+    public String toString() {
+        return "Message handler for type=" + type.getName() + ", handler=" + handler.getClass().getName();
     }
 }
