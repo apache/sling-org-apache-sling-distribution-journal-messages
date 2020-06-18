@@ -18,9 +18,7 @@
  */
 package org.apache.sling.distribution.journal;
 
-import com.google.protobuf.GeneratedMessage;
-
-public class FullMessage<T extends GeneratedMessage> {
+public class FullMessage<T> {
 
     private MessageInfo info;
     private T message;

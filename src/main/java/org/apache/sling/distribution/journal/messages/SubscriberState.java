@@ -16,6 +16,24 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.0.0")
 package org.apache.sling.distribution.journal.messages;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class SubscriberState {
+    // Publisher agent name
+    String pubAgentName;
+    
+    // Last processed offset on the Subscriber agent
+    long offset;
+    
+    // Nb of retries for the current offset on the Subscriber agent
+    int retries;
+}

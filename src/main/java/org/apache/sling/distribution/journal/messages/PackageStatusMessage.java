@@ -27,15 +27,45 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PackageDistributedMessage {
+public class PackageStatusMessage {
 
-    public String pubAgentName;
+    String subSlingId;
+    String subAgentName;
+    String pubAgentName;
+    long offset;
+    PackageStatusMessage.Status status;
 
-    public String packageId;
+    public enum Status {
+        /**
+         * The package has been removed automatically after failing every retry attempts
+         */
+        REMOVED_FAILED(0),
+        /**
+         * The package has been removed explicitly
+         */
+        REMOVED(1),
+        /**
+         * The package has been imported
+         */
+        IMPORTED(2);
 
-    public String[] deepPaths;
+        private int number;
 
-    public String[] paths;
-
-    public long offset;
+        Status(int number) {
+            this.number = number;
+        }
+        
+        public int getNumber() {
+            return number;
+        }
+        
+        public static Status fromNumber(int number) {
+            switch (number) {
+                case 0: return REMOVED_FAILED;
+                case 1: return REMOVED;
+                case 2: return IMPORTED;
+            }
+            throw new IllegalStateException("Unknown number " + number);
+        }
+    }
 }

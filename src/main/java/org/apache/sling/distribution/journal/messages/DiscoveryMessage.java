@@ -16,6 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.0.0")
 package org.apache.sling.distribution.journal.messages;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class DiscoveryMessage {
+    
+    // Subscriber agent Sling identifier
+    String subSlingId;
+    
+    // Subscriber agent name
+    String subAgentName;
+    
+    SubscriberConfig subscriberConfiguration;
+    
+    List<SubscriberState> subscriberStates;
+}

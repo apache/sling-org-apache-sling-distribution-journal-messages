@@ -19,13 +19,20 @@
 package org.apache.sling.distribution.journal;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
-import com.google.protobuf.GeneratedMessage;
+public interface MessageSender<T> extends Consumer<T> {
 
-public interface MessageSender<T extends GeneratedMessage> {
-
-    void send(String topic, T payload) throws MessagingException;
+    /**
+     * Make sure every MessageSender also acts as Consumer
+     */
+    @Override
+    default void accept(T payload) {
+        send(payload);
+    }
     
-    void send(String topic, T payload, Map<String, String> properties) throws MessagingException;
+    void send(T payload) throws MessagingException;
+    
+    void send(T payload, Map<String, String> properties) throws MessagingException;
 
 }
