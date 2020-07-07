@@ -22,6 +22,8 @@ public class MessagingException extends RuntimeException {
 
     private static final long serialVersionUID = 2381842058778043644L;
 
+    private String responseCode;
+
     public MessagingException(String message) {
         super(message);
     }
@@ -30,4 +32,12 @@ public class MessagingException extends RuntimeException {
         super(message, cause);
     }
 
+    public MessagingException(String message, String responseCode) {
+        super(message);
+        this.responseCode = responseCode;
+    }
+
+    public String getResponseCode() {
+        return responseCode;
+    }
 }

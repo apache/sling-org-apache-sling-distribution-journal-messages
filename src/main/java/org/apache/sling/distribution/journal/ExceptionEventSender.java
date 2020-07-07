@@ -35,7 +35,8 @@ public class ExceptionEventSender {
     public static final String ERROR_TOPIC = "org/apache/sling/distribution/journal/errors";
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_TYPE = "type";
-    
+    public static final String KEY_ERROR_CODE = "errorCode";
+
     private final EventAdmin eventAdmin;
 
     public ExceptionEventSender(@Nullable EventAdmin eventAdmin) {
@@ -46,6 +47,12 @@ public class ExceptionEventSender {
         Map<String, String> props = new HashMap<>();
         props.put(KEY_TYPE, e.getClass().getName());
         props.put(KEY_MESSAGE, e.getMessage());
+        if (e instanceof MessagingException) {
+            String errorCode = ((MessagingException) e).getResponseCode();
+            if ((errorCode != null) && !errorCode.isEmpty()) {
+                props.put(KEY_ERROR_CODE, errorCode);
+            }
+        }
         return new Event(ERROR_TOPIC, props);
     }
 
