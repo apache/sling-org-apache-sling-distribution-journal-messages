@@ -24,10 +24,24 @@ import java.io.InputStream;
 /**
  * Abstraction for storing binaries
  */
-public interface BinaryStore<R, D> {
+public interface BinaryStore {
 
-    InputStream get(R resourceResolver, String reference) throws IOException;
+    /**
+     * Return an input stream for the identifier
+     *
+     * @param reference binary reference
+     * @return
+     * @throws IOException
+     */
+    InputStream get(String reference) throws IOException;
 
-    String store(R resourceResolver, D disPkg, long pkgLength)
-        throws IOException;
+    /**
+     * Return the reference for the
+     * @param id binary identifier
+     * @param stream stream to store
+     * @param length length of the stream
+     * @return
+     * @throws IOException
+     */
+    String put(String id, InputStream stream, long length) throws IOException;
 }
