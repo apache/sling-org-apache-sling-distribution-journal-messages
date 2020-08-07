@@ -29,6 +29,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LogMessage {
     
+    // Publisher agent name
+    String pubAgentName;
+    
     // Subscriber agent Sling identifier
     String subSlingId;
     
