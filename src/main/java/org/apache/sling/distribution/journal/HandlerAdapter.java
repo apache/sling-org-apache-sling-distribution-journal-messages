@@ -31,7 +31,7 @@ public class HandlerAdapter<T> {
         this.handler = handler;
     }
 
-    public Class<?> getType() {
+    public Class<T> getType() {
         return type;
     }
 
