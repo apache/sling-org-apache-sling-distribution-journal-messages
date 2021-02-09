@@ -19,6 +19,7 @@
 package org.apache.sling.distribution.journal;
 
 import java.io.Closeable;
+import java.net.URI;
 
 public interface MessagingProvider {
 
@@ -38,5 +39,13 @@ public interface MessagingProvider {
     long retrieveOffset(String topicName, Reset reset);
 
     String assignTo(long offset);
+    
+    /**
+     * Return the uri of the messaging system backend.
+     * The uri must be unique regarding the validity of per topic offsets.
+     *  
+     * @return uri
+     */
+    URI getServerUri();
 
 }
