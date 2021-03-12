@@ -19,6 +19,7 @@
 package org.apache.sling.distribution.journal.messages;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -51,5 +52,56 @@ public class PackageMessage {
         ADD,
         DELETE,
         TEST;
+    }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append("PackageMessage(pubSlingId=");
+        out.append(pubSlingId);
+        out.append(", reqType=");
+        out.append(reqType);
+        out.append(", pkgId=");
+        out.append(pkgId);
+        out.append(", pkgType=");
+        out.append(pkgType);
+        out.append(", pkgLength=");
+        out.append(pkgLength);
+        out.append(", pubAgentName=");
+        out.append(pubAgentName);
+        out.append(", userId=");
+        out.append(userId);
+        if (pkgBinary != null) {
+            out.append(", pkgBinary.length=");
+            out.append(pkgBinary.length);
+        }
+        if (pkgBinaryRef != null) {
+            out.append(", pkgBinaryRef=");
+            out.append(pkgBinaryRef);
+        }
+        out.append(", paths=");
+        out.append(abbreviate(paths));
+        out.append(", deepPaths=");
+        out.append(abbreviate(deepPaths));
+        out.append(")");
+        return out.toString();
+    }
+
+    static String abbreviate(List<String> list) {
+        if (list == null) {
+            return null;
+        }
+        Iterator<String> iter = list.iterator();
+        StringBuilder abbr = new StringBuilder();
+        abbr.append("[");
+        if (iter.hasNext()) {
+            abbr.append(iter.next());
+        }
+        if (iter.hasNext()) {
+            abbr.append(", ... ");
+            abbr.append(list.size() - 1);
+            abbr.append(" more");
+        }
+        abbr.append("]");
+        return abbr.toString();
     }
 }
