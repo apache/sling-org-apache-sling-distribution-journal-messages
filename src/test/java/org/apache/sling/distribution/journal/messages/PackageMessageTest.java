@@ -20,7 +20,6 @@ package org.apache.sling.distribution.journal.messages;
 
 import static org.apache.sling.distribution.journal.messages.PackageMessage.abbreviate;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertNull;
@@ -36,7 +35,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
