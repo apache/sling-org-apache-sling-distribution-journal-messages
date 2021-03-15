@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -75,19 +76,19 @@ public class PackageMessageTest {
     @Test
     public void testAbbreviateEmptyPaths() {
         List<String> empty = Collections.emptyList();
-        assertEquals(abbreviate(empty), empty.toString());
+        assertThat(abbreviate(empty), equalTo(empty.toString()));
     }
 
     @Test
     public void testAbbreviateOnePaths() {
         List<String> one = Collections.singletonList("/a/path");
-        assertEquals(abbreviate(one), one.toString());
+        assertThat(abbreviate(one), equalTo(one.toString()));
     }
 
     @Test
     public void testAbbreviateManyPaths() {
         List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
-        assertEquals(abbreviate(one), "[/a/path, ... 2 more]");
+        assertThat(abbreviate(one), equalTo("[/a/path, ... 2 more]"));
     }
 
 }
