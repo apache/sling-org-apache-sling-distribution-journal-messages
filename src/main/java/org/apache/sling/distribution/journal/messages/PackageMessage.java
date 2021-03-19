@@ -74,10 +74,6 @@ public class PackageMessage {
             out.append(", pkgBinary.length=");
             out.append(pkgBinary.length);
         }
-        if (pkgBinaryRef != null) {
-            out.append(", pkgBinaryRef=");
-            out.append(pkgBinaryRef);
-        }
         out.append(", paths=");
         out.append(abbreviate(paths));
         out.append(", deepPaths=");
