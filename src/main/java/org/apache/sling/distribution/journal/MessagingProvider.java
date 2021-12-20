@@ -40,6 +40,8 @@ public interface MessagingProvider {
 
     String assignTo(long offset);
     
+    String assignTo(Reset reset, long relativeOffset);
+    
     /**
      * Return the uri of the messaging system backend.
      * The uri must be unique regarding the validity of per topic offsets.
