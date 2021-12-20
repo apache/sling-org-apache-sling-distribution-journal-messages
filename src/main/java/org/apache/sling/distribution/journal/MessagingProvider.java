@@ -21,8 +21,20 @@ package org.apache.sling.distribution.journal;
 import java.io.Closeable;
 import java.net.URI;
 
+/**
+ * Messaging abstraction for a journal based messaging like Apache Kafka.
+ * Messages are represented as json serialisable java classes.
+ * The API assumes that each MessagingProvider is mapped to exactly one partition,
+ * so positions in a topic can be represented as a single long offset.
+ */
 public interface MessagingProvider {
 
+    /**
+     * Create sender for a specific topic
+     * @param <T> type of the message
+     * @param topic topic name
+     * @return sender
+     */
     <T> MessageSender<T> createSender(String topic);
 
     default Closeable createPoller(
@@ -32,14 +44,51 @@ public interface MessagingProvider {
         return createPoller(topicName, reset, null, adapters);
     }
 
+    /**
+     * Create a poller which listens to a topic and starts at a given reset or assigned offset.
+     * 
+     * @param topicName name of the topic
+     * @param reset fallback in case no assign is given or the assigned offset not valid
+     * @param assign opaque implementation dependent assign string (can be null)
+     * @param adapters list of listener adapters
+     * @return closeable handle of the poller
+     */
     Closeable createPoller(String topicName, Reset reset, String assign, HandlerAdapter<?>... adapters);
 
+    /**
+     * Validate that a topic is suitably set up for the messaging implementation
+     * 
+     * @param topic topic name
+     * @throws MessagingException exception in case the topic is not suitable
+     */
     void assertTopic(String topic) throws MessagingException;
 
+    /**
+     * Retrieve earliest or latest offset for a topic
+     * 
+     * @param topicName name of the topic
+     * @param reset latest or earliest
+     * @return offset
+     */
     long retrieveOffset(String topicName, Reset reset);
 
+    /**
+     * Create assign String to feed into poller based on a given offset.
+     * The inner format of the assign string is implementation specific.
+     *  
+     * @param offset
+     * @return assign String
+     */
     String assignTo(long offset);
     
+    /**
+     * Get assign String to feed into createPoller based on either earliest or latest and a relative offset.
+     * The inner format of the assign string is implementation specific.
+     * 
+     * @param reset reference point
+     * @param relativeOffset relative offset
+     * @return assign String
+     */
     String assignTo(Reset reset, long relativeOffset);
     
     /**
