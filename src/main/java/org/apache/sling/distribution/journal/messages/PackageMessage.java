@@ -51,6 +51,7 @@ public class PackageMessage {
     public enum ReqType {
         ADD,
         DELETE,
+        INVALIDATE,
         TEST;
     }
 
