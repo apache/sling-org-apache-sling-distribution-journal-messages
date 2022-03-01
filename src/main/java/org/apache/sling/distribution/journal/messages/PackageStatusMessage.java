@@ -47,7 +47,11 @@ public class PackageStatusMessage {
         /**
          * The package has been imported
          */
-        IMPORTED(2);
+        IMPORTED(2),
+        /**
+         * The package invalidated the cache
+         */
+        INVALIDATED(3);
 
         private int number;
 
@@ -64,6 +68,7 @@ public class PackageStatusMessage {
                 case 0: return REMOVED_FAILED;
                 case 1: return REMOVED;
                 case 2: return IMPORTED;
+                case 3: return INVALIDATED;
             }
             throw new IllegalStateException("Unknown number " + number);
         }
