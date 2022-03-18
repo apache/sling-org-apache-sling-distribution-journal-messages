@@ -47,7 +47,7 @@ public class PackageStatusMessage {
         /**
          * The package has been applied
          */
-        APPLIED(2);
+        IMPORTED(2);
 
         private int number;
 
@@ -63,7 +63,7 @@ public class PackageStatusMessage {
             switch (number) {
                 case 0: return REMOVED_FAILED;
                 case 1: return REMOVED;
-                case 2: return APPLIED;
+                case 2: return IMPORTED;
             }
             throw new IllegalStateException("Unknown number " + number);
         }
