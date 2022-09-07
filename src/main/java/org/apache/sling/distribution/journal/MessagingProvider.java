@@ -62,7 +62,7 @@ public interface MessagingProvider {
      * @param topicName name of the topic
      * @param reset fallback in case no assign is given or the assigned offset not valid
      * @param assign opaque implementation dependent assign string (can be null)
-     * @param properties map of properties to filter the topic
+     * @param properties list of properties to filter the topic
      * @param adapters list of listener adapters
      * @return closeable handle of the poller
      */
