@@ -18,24 +18,15 @@
  */
 package org.apache.sling.distribution.journal;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
+/*
+ * FilterProperty is an interface that allows for creating a filter for the journal messages.
+ * This filters are used in the production and consumption of messages, and their supported types depend
+ * on the implementation of the messaging provider.
+ */
+public interface FilterProperty {
 
-public interface MessageSender<T> extends Consumer<T> {
+    public String getName();
 
-    /**
-     * Make sure every MessageSender also acts as Consumer
-     */
-    @Override
-    default void accept(T payload) {
-        send(payload);
-    }
-    
-    void send(T payload) throws MessagingException;
-    
-    void send(T payload, Map<String, String> properties) throws MessagingException;
-
-    void send(T payload, List<FilterProperty> properties) throws MessagingException;
+    public Object getValue();
 
 }
