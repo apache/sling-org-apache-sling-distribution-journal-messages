@@ -113,4 +113,13 @@ public interface MessagingProvider {
      */
     URI getServerUri();
 
+    /**
+     * Creates a new filter property that can be used to filter the messaging provider
+     * data on the consumer side.
+     * @param name the name of the property
+     * @param values the values of the property
+     * @return FilterProperty
+     */
+    FilterProperty createFilterProperty(String name, List<String> values);
+
 }
