@@ -18,27 +18,21 @@
  */
 package org.apache.sling.distribution.journal;
 
+import java.util.List;
+
 /*
- * FilterProperty is a class that defines a filter for the journal messages.
+ * FilterProperty is an that defines a filter for the journal messages.
  * This filters are used in the production and consumption of messages, and their supported values depend
  * on the implementation of the messaging provider.
  */
-public class FilterProperty {
+public interface FilterProperty {
 
-    private final String name;
-    private final Object value;
+    public String getName();
 
-    public FilterProperty(String name, Object value) {
-        this.name = name;
-        this.value = value;
-    }
+    public Object toMessagingProvider();
 
-    public String getName() {
-        return name;
-    }
+    public List<String> getValues();
 
-    public Object getValue() {
-        return value;
-    }
+    public String getValuesString();
 
 }

@@ -36,6 +36,7 @@ public interface MessageSender<T> extends Consumer<T> {
     
     void send(T payload, Map<String, String> properties) throws MessagingException;
 
-    void send(T payload, List<FilterProperty> properties) throws MessagingException;
+    void send(T payload, Map<String, String> properties, List<FilterProperty> filterProperties)
+            throws MessagingException;
 
 }
