@@ -20,7 +20,6 @@ package org.apache.sling.distribution.journal;
 
 import java.io.Closeable;
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,4 +115,4 @@ public interface MessagingProvider {
      */
     URI getServerUri();
 
-    }
+}
