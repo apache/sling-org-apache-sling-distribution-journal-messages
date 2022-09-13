@@ -18,7 +18,6 @@
  */
 package org.apache.sling.distribution.journal;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -35,8 +34,5 @@ public interface MessageSender<T> extends Consumer<T> {
     void send(T payload) throws MessagingException;
     
     void send(T payload, Map<String, String> properties) throws MessagingException;
-
-    void send(T payload, Map<String, String> properties, List<FilterProperty> filterProperties)
-            throws MessagingException;
 
 }

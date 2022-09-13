@@ -21,6 +21,7 @@ package org.apache.sling.distribution.journal;
 import java.io.Closeable;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Messaging abstraction for a journal based messaging like Apache Kafka.
@@ -62,12 +63,14 @@ public interface MessagingProvider {
      * @param topicName name of the topic
      * @param reset fallback in case no assign is given or the assigned offset not valid
      * @param assign opaque implementation dependent assign string (can be null)
-     * @param filterProperties list of properties to filter the topic
+     * @param properties list of properties to filter the topic
      * @param adapters list of listener adapters
      * @return closeable handle of the poller
      */
-    Closeable createPoller(String topicName, Reset reset, String assign, List<FilterProperty> filterProperties,
-            HandlerAdapter<?>... adapters);
+    default Closeable createPoller(String topicName, Reset reset, String assign, Map<String, String> properties,
+            HandlerAdapter<?>... adapters) {
+        return createPoller(topicName, reset, assign, adapters);
+    }
 
     /**
      * Validate that a topic is suitably set up for the messaging implementation
@@ -113,13 +116,4 @@ public interface MessagingProvider {
      */
     URI getServerUri();
 
-    /**
-     * Creates a new filter property that can be used to filter the messaging provider
-     * data on the consumer side.
-     * @param name the name of the property
-     * @param values the values of the property
-     * @return FilterProperty
-     */
-    FilterProperty createFilterProperty(String name, List<String> values);
-
-}
+    }
