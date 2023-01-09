@@ -62,10 +62,8 @@ public interface MessagingProvider {
      * @param topicName name of the topic
      * @param reset fallback in case no assign is given or the assigned offset not valid
      * @param assign opaque implementation dependent assign string (can be null)
-     * @param filterProperties list of properties used to filter the topic messages.
-     *   - The exact semantics for the keys and values of these filterProperties depend on the MessagingProvider
-     *     implementation and how it handles topic filtering. However, a Map<String, String> provides a
-     *     roughly abstracted way for defining such filters.
+     * @param filterProperties List of properties used to filter the topic messages.
+     * Only messages that match all filterProperties keys and values will be received.
      * @param adapters list of listener adapters
      * @return closeable handle of the poller
      */
