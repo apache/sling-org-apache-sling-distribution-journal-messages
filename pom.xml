@@ -42,7 +42,6 @@
     <properties>
         <sling.java.version>8</sling.java.version>
         <project.build.outputTimestamp>2023-09-21T17:03:36Z</project.build.outputTimestamp>
-        <baseline.skip>true</baseline.skip>
     </properties>
 
     <scm>
