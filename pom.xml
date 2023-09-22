@@ -34,14 +34,14 @@
     <!-- P R O J E C T -->
     <!-- ======================================================================= -->
     <artifactId>org.apache.sling.distribution.journal.messages</artifactId>
-    <version>0.5.4</version>
+    <version>0.5.5-SNAPSHOT</version>
 
     <name>Apache Sling Journal based Content Distribution - Messages bundle</name>
     <description>Implementation of the messages to support Apache Sling Content Distribution on top of an append-only persisted log</description>
 
     <properties>
         <sling.java.version>8</sling.java.version>
-        <project.build.outputTimestamp>2023-09-22T09:36:25Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2023-09-22T09:37:54Z</project.build.outputTimestamp>
     </properties>
 
     <scm>
