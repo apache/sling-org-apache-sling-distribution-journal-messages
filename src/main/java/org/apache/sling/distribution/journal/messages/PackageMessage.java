@@ -21,6 +21,7 @@ package org.apache.sling.distribution.journal.messages;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,6 +42,7 @@ public class PackageMessage {
     String pkgBinaryRef;
     String pubAgentName;
     String userId;
+    Map<String, Object> metadata;
     
     @Builder.Default
     List<String> paths = new ArrayList<>();
@@ -79,6 +81,8 @@ public class PackageMessage {
         out.append(abbreviate(paths));
         out.append(", deepPaths=");
         out.append(abbreviate(deepPaths));
+        out.append(", metadata=");
+        out.append(metadata);
         out.append(")");
         return out.toString();
     }

@@ -16,5 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.4.0")
 package org.apache.sling.distribution.journal.messages;
+
+import java.util.Map;
+
+/**
+ * This service provider interface can be used to inject metadata into the package message.
+ */
+public interface PackageMessageMetadataInjector {
+
+	/**
+	 * Inject metadata into the package message
+	 * @param message package message
+	 */
+	void injectMetadata(PackageMessage message);
+}

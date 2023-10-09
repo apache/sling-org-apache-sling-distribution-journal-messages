@@ -50,6 +50,7 @@ public class PackageMessageTest {
         PackageMessage message = PackageMessage.builder()
             .paths(Collections.singletonList("/test"))
             .pkgBinary(pkgBinary)
+                .metadata(Collections.singletonMap("testMetadataField", "test"))
             .build();
         ObjectWriter writer = new ObjectMapper().writerFor(PackageMessage.class);
         StringWriter outWriter = new StringWriter();
