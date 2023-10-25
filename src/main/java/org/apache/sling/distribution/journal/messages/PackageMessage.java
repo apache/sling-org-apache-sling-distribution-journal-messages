@@ -42,7 +42,7 @@ public class PackageMessage {
     String pkgBinaryRef;
     String pubAgentName;
     String userId;
-    Map<String, Object> metadata;
+    Map<String, String> metadata;
     
     @Builder.Default
     List<String> paths = new ArrayList<>();
