@@ -26,34 +26,23 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@Builder
+@Builder(builderMethodName = "builderWithMetadata")
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PackageMessage {
-    @NonNull
     String pubSlingId;
-    @NonNull
     ReqType reqType;
-    @NonNull
     String pkgId;
-    @NonNull
     String pkgType;
-    @NonNull
     long pkgLength;
-    @NonNull
     byte[] pkgBinary;
-    @NonNull
     String pkgBinaryRef;
-    @NonNull
     String pubAgentName;
-    @NonNull
     String userId;
 
-    @NonNull
     @Builder.Default
     List<String> paths = new ArrayList<>();
 
-    @NonNull
     @Builder.Default
     List<String> deepPaths = new ArrayList<>();
 
@@ -66,12 +55,12 @@ public class PackageMessage {
         TEST;
     }
 
-    // Custom constructor that includes metadata
-    @Builder(builderMethodName = "builderWithMetadata")
+    // Custom constructor that doesnt include metadata
+    @Builder(builderMethodName = "builder")
     public PackageMessage(String pubSlingId, ReqType reqType, String pkgId, String pkgType,
                           long pkgLength, byte[] pkgBinary, String pkgBinaryRef,
                           String pubAgentName, String userId, List<String> paths,
-                          List<String> deepPaths, Map<String, String> metadata) {
+                          List<String> deepPaths) {
         this.pubSlingId = pubSlingId;
         this.reqType = reqType;
         this.pkgId = pkgId;
@@ -83,7 +72,7 @@ public class PackageMessage {
         this.pkgBinary = pkgBinary;
         this.paths = paths;
         this.deepPaths = deepPaths;
-        this.metadata = metadata;
+        this.metadata = null;
     }
 
     public String toString() {
