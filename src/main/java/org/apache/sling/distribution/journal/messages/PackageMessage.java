@@ -23,38 +23,68 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PackageMessage {
+    @NonNull
     String pubSlingId;
+    @NonNull
     ReqType reqType;
+    @NonNull
     String pkgId;
+    @NonNull
     String pkgType;
+    @NonNull
     long pkgLength;
+    @NonNull
     byte[] pkgBinary;
+    @NonNull
     String pkgBinaryRef;
+    @NonNull
     String pubAgentName;
+    @NonNull
     String userId;
-    Map<String, String> metadata;
-    
+
+    @NonNull
     @Builder.Default
     List<String> paths = new ArrayList<>();
-    
+
+    @NonNull
     @Builder.Default
     List<String> deepPaths = new ArrayList<>();
-    
+
+    Map<String, String> metadata;
+
     public enum ReqType {
         ADD,
         DELETE,
         INVALIDATE,
         TEST;
+    }
+
+    // Custom constructor that includes metadata
+    @Builder(builderMethodName = "builderWithMetadata")
+    public PackageMessage(String pubSlingId, ReqType reqType, String pkgId, String pkgType,
+                          long pkgLength, byte[] pkgBinary, String pkgBinaryRef,
+                          String pubAgentName, String userId, List<String> paths,
+                          List<String> deepPaths, Map<String, String> metadata) {
+        this.pubSlingId = pubSlingId;
+        this.reqType = reqType;
+        this.pkgId = pkgId;
+        this.pkgType = pkgType;
+        this.pkgBinaryRef = pkgBinaryRef;
+        this.pubAgentName = pubAgentName;
+        this.userId = userId;
+        this.pkgLength = pkgLength;
+        this.pkgBinary = pkgBinary;
+        this.paths = paths;
+        this.deepPaths = deepPaths;
+        this.metadata = metadata;
     }
 
     public String toString() {
