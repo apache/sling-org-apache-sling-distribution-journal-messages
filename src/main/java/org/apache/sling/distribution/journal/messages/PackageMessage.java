@@ -18,10 +18,7 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
