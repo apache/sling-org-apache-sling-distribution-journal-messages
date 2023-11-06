@@ -20,10 +20,7 @@ package org.apache.sling.distribution.journal.messages;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @Builder(builderMethodName = "builderWithMetadata")
@@ -46,7 +43,7 @@ public class PackageMessage {
     @Builder.Default
     List<String> deepPaths = new ArrayList<>();
 
-    Map<String, String> metadata;
+    Map<String, String> metadata = new HashMap<>();
 
     public enum ReqType {
         ADD,
@@ -55,7 +52,7 @@ public class PackageMessage {
         TEST;
     }
 
-    // Custom constructor that doesnt include metadata
+    // Default constructor containing the minimum required fields
     @Builder(builderMethodName = "builder")
     public PackageMessage(String pubSlingId, ReqType reqType, String pkgId, String pkgType,
                           long pkgLength, byte[] pkgBinary, String pkgBinaryRef,
@@ -72,7 +69,6 @@ public class PackageMessage {
         this.pkgBinary = pkgBinary;
         this.paths = paths;
         this.deepPaths = deepPaths;
-        this.metadata = null;
     }
 
     public String toString() {
