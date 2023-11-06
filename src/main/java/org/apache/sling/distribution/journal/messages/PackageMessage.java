@@ -18,13 +18,15 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
-import lombok.*;
 
 @Data
 @Builder
