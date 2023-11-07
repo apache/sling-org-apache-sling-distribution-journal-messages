@@ -21,7 +21,7 @@ package org.apache.sling.distribution.journal.messages;
 import static org.apache.sling.distribution.journal.messages.PackageMessage.abbreviate;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
@@ -37,25 +37,41 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class PackageMessageTest {
 
-    @Test
-    public void testSerialize() throws JsonGenerationException, JsonMappingException, IOException {
-        byte[] pkgBinary = new String("dummy").getBytes();
-        PackageMessage message = PackageMessage.builder()
-            .paths(Collections.singletonList("/test"))
-            .pkgBinary(pkgBinary)
-            .build();
+    private String serializePackageMessage(PackageMessage message) throws IOException {
         ObjectWriter writer = new ObjectMapper().writerFor(PackageMessage.class);
         StringWriter outWriter = new StringWriter();
         writer.writeValue(outWriter, message);
-        String serialized = outWriter.getBuffer().toString();
+        return outWriter.getBuffer().toString();
+    }
+
+    @Test
+    public void testSerialize() throws IOException {
+        byte[] pkgBinary = "dummy".getBytes();
+        PackageMessage message = PackageMessage.builder()
+            .paths(Collections.singletonList("/test"))
+            .pkgBinary(pkgBinary)
+            .metadata(Collections.singletonMap("testMetadataField", "test"))
+            .build();
+        String serialized = serializePackageMessage(message);
         Path path = Paths.get("src/test/resources/serialized.json");
+        String expected = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.joining());
+        assertThat(serialized, equalTo(expected));
+    }
+
+    @Test
+    public void testSerializeWithoutMetadata() throws IOException {
+        byte[] pkgBinary = "dummy".getBytes();
+        PackageMessage message = PackageMessage.builder()
+                .paths(Collections.singletonList("/test"))
+                .pkgBinary(pkgBinary)
+                .build();
+        String serialized = serializePackageMessage(message);
+        Path path = Paths.get("src/test/resources/serialized-no-metadata.json");
         String expected = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.joining());
         assertThat(serialized, equalTo(expected));
     }
