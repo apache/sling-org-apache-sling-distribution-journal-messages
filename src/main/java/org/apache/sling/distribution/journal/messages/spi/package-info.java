@@ -16,16 +16,5 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.distribution.journal.messages;
-
-import java.util.List;
-import java.util.Map;
-
-
-/**
- * This interface can be used to provide metadata for a ${@link PackageMessage}.
- */
-public interface PackageMessageMetadataProvider {
-
-	Map<String, String> getMetadata(List<String> paths);
-}
+@org.osgi.annotation.versioning.Version("1.0.0")
+package org.apache.sling.distribution.journal.messages.spi;
