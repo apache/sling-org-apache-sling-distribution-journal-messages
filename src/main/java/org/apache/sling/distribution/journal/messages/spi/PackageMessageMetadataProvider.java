@@ -32,5 +32,5 @@ import java.util.Map;
 @ConsumerType
 public interface PackageMessageMetadataProvider {
 
-	Map<String,String> getMetadata(DistributionRequest request);
+	Map<String,String> getMetadata(DistributionRequest request) throws Exception;
 }
