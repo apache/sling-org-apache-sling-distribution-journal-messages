@@ -28,7 +28,6 @@ import java.util.Map;
 /**
  * This interface can be used to provide metadata for a ${@link PackageMessage}.
  */
-// option 2
 @ConsumerType
 public interface PackageMessageMetadataProvider {
 
