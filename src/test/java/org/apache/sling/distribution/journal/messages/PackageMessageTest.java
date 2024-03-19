@@ -18,7 +18,7 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import static org.apache.sling.distribution.journal.messages.PackageMessage.abbreviate;
+import static org.apache.sling.distribution.journal.messages.PackageMessage.printList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -84,25 +84,31 @@ public class PackageMessageTest {
 
     @Test
     public void testAbbreviateNullPaths() {
-        assertNull(abbreviate(null));
+        assertNull(printList(null, true));
     }
 
     @Test
     public void testAbbreviateEmptyPaths() {
         List<String> empty = Collections.emptyList();
-        assertThat(abbreviate(empty), equalTo(empty.toString()));
+        assertThat(printList(empty, true), equalTo(empty.toString()));
     }
 
     @Test
     public void testAbbreviateOnePaths() {
         List<String> one = Collections.singletonList("/a/path");
-        assertThat(abbreviate(one), equalTo(one.toString()));
+        assertThat(printList(one, true), equalTo(one.toString()));
     }
 
     @Test
     public void testAbbreviateManyPaths() {
         List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
-        assertThat(abbreviate(one), equalTo("[/a/path, ... 2 more]"));
+        assertThat(printList(one, true), equalTo("[/a/path, ... 2 more]"));
+    }
+    
+    @Test
+    public void testPrintManyPaths() {
+        List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
+        assertThat(printList(one, false), equalTo("[/a/path, /another/one, /yet/another/one]"));
     }
 
 }
