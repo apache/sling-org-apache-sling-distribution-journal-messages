@@ -43,6 +43,7 @@ public class PackageMessage {
     @Builder.Default
     List<String> deepPaths = new ArrayList<>();
 
+    // No builder default, we want metadata to be null by default
     Map<String, String> metadata = new HashMap<>();
 
     public enum ReqType {
@@ -70,8 +71,12 @@ public class PackageMessage {
         this.paths = paths;
         this.deepPaths = deepPaths;
     }
-
+    
     public String toString() {
+        return toString(true);
+    }
+
+    public String toString(boolean abbreviate) {
         StringBuilder out = new StringBuilder();
         out.append("PackageMessage(pubSlingId=");
         out.append(pubSlingId);
@@ -92,31 +97,36 @@ public class PackageMessage {
             out.append(pkgBinary.length);
         }
         out.append(", paths=");
-        out.append(abbreviate(paths));
+        out.append(printList(paths, abbreviate));
         out.append(", deepPaths=");
-        out.append(abbreviate(deepPaths));
+        out.append(printList(deepPaths, abbreviate));
         out.append(", metadata=");
         out.append(metadata);
         out.append(")");
         return out.toString();
     }
 
-    static String abbreviate(List<String> list) {
+    static String printList(List<String> list, boolean abbreviate) {
         if (list == null) {
             return null;
         }
-        Iterator<String> iter = list.iterator();
-        StringBuilder abbr = new StringBuilder();
-        abbr.append("[");
-        if (iter.hasNext()) {
-            abbr.append(iter.next());
+        if (abbreviate) {
+            Iterator<String> iter = list.iterator();
+            StringBuilder abbr = new StringBuilder();
+            abbr.append("[");
+            if (iter.hasNext()) {
+                abbr.append(iter.next());
+            }
+            if (iter.hasNext()) {
+                abbr.append(", ... ");
+                abbr.append(list.size() - 1);
+                abbr.append(" more");
+            }
+            abbr.append("]");
+            return abbr.toString();
+        } else {
+            return list.toString();
         }
-        if (iter.hasNext()) {
-            abbr.append(", ... ");
-            abbr.append(list.size() - 1);
-            abbr.append(" more");
-        }
-        abbr.append("]");
-        return abbr.toString();
+        
     }
 }
