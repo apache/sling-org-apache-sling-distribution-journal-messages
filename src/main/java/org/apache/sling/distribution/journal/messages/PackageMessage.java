@@ -110,23 +110,21 @@ public class PackageMessage {
         if (list == null) {
             return null;
         }
-        if (abbreviate) {
-            Iterator<String> iter = list.iterator();
-            StringBuilder abbr = new StringBuilder();
-            abbr.append("[");
-            if (iter.hasNext()) {
-                abbr.append(iter.next());
-            }
-            if (iter.hasNext()) {
-                abbr.append(", ... ");
-                abbr.append(list.size() - 1);
-                abbr.append(" more");
-            }
-            abbr.append("]");
-            return abbr.toString();
-        } else {
+        if (!abbreviate) {
             return list.toString();
         }
-        
+        Iterator<String> iter = list.iterator();
+        StringBuilder abbr = new StringBuilder();
+        abbr.append("[");
+        if (iter.hasNext()) {
+            abbr.append(iter.next());
+        }
+        if (iter.hasNext()) {
+            abbr.append(", ... ");
+            abbr.append(list.size() - 1);
+            abbr.append(" more");
+        }
+        abbr.append("]");
+        return abbr.toString();
     }
 }
