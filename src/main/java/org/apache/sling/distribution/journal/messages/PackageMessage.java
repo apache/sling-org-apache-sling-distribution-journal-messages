@@ -78,34 +78,12 @@ public class PackageMessage {
             out.append(pkgBinary.length);
         }
         out.append(", paths=");
-        out.append(printList(paths, abbreviate));
+        out.append(ListPrinter.print(paths, abbreviate));
         out.append(", deepPaths=");
-        out.append(printList(deepPaths, abbreviate));
+        out.append(ListPrinter.print(deepPaths, abbreviate));
         out.append(", metadata=");
         out.append(metadata);
         out.append(")");
         return out.toString();
-    }
-
-    static String printList(List<String> list, boolean abbreviate) {
-        if (list == null) {
-            return null;
-        }
-        if (!abbreviate) {
-            return list.toString();
-        }
-        Iterator<String> iter = list.iterator();
-        StringBuilder abbr = new StringBuilder();
-        abbr.append("[");
-        if (iter.hasNext()) {
-            abbr.append(iter.next());
-        }
-        if (iter.hasNext()) {
-            abbr.append(", ... ");
-            abbr.append(list.size() - 1);
-            abbr.append(" more");
-        }
-        abbr.append("]");
-        return abbr.toString();
     }
 }

@@ -18,12 +18,9 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import static org.apache.sling.distribution.journal.messages.PackageMessage.printList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -31,9 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -57,6 +52,7 @@ public class PackageMessageTest {
         assertThat(message.getPaths(), notNullValue());
         assertThat(message.getDeepPaths(), notNullValue());
         assertThat(message.getMetadata(), notNullValue());
+        assertThat(message.toString(), notNullValue());
     }
 
     @Test
@@ -84,41 +80,6 @@ public class PackageMessageTest {
         Path path = Paths.get("src/test/resources/serialized-no-metadata.json");
         String expected = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.joining());
         assertThat(serialized, equalTo(expected));
-    }
-
-    @Test
-    public void testToStringWithDefault() {
-        PackageMessage message = PackageMessage.builder().build();
-        assertNotNull(message.toString());
-    }
-
-    @Test
-    public void testAbbreviateNullPaths() {
-        assertNull(printList(null, true));
-    }
-
-    @Test
-    public void testAbbreviateEmptyPaths() {
-        List<String> empty = Collections.emptyList();
-        assertThat(printList(empty, true), equalTo(empty.toString()));
-    }
-
-    @Test
-    public void testAbbreviateOnePaths() {
-        List<String> one = Collections.singletonList("/a/path");
-        assertThat(printList(one, true), equalTo(one.toString()));
-    }
-
-    @Test
-    public void testAbbreviateManyPaths() {
-        List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
-        assertThat(printList(one, true), equalTo("[/a/path, ... 2 more]"));
-    }
-    
-    @Test
-    public void testPrintManyPaths() {
-        List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
-        assertThat(printList(one, false), equalTo("[/a/path, /another/one, /yet/another/one]"));
     }
 
 }
