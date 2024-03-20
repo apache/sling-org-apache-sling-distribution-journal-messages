@@ -23,7 +23,7 @@ import lombok.*;
 import java.util.*;
 
 @Data
-@Builder(builderMethodName = "builderWithMetadata")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PackageMessage {
@@ -43,7 +43,7 @@ public class PackageMessage {
     @Builder.Default
     List<String> deepPaths = new ArrayList<>();
 
-    // No builder default, we want metadata to be null by default
+    @Builder.Default
     Map<String, String> metadata = new HashMap<>();
 
     public enum ReqType {
@@ -51,25 +51,6 @@ public class PackageMessage {
         DELETE,
         INVALIDATE,
         TEST;
-    }
-
-    // Default constructor containing the minimum required fields
-    @Builder(builderMethodName = "builder")
-    public PackageMessage(String pubSlingId, ReqType reqType, String pkgId, String pkgType,
-                          long pkgLength, byte[] pkgBinary, String pkgBinaryRef,
-                          String pubAgentName, String userId, List<String> paths,
-                          List<String> deepPaths) {
-        this.pubSlingId = pubSlingId;
-        this.reqType = reqType;
-        this.pkgId = pkgId;
-        this.pkgType = pkgType;
-        this.pkgBinaryRef = pkgBinaryRef;
-        this.pubAgentName = pubAgentName;
-        this.userId = userId;
-        this.pkgLength = pkgLength;
-        this.pkgBinary = pkgBinary;
-        this.paths = paths;
-        this.deepPaths = deepPaths;
     }
     
     public String toString() {

@@ -20,6 +20,7 @@ package org.apache.sling.distribution.journal.messages;
 
 import static org.apache.sling.distribution.journal.messages.PackageMessage.printList;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNull;
@@ -47,6 +48,15 @@ public class PackageMessageTest {
         StringWriter outWriter = new StringWriter();
         writer.writeValue(outWriter, message);
         return outWriter.getBuffer().toString();
+    }
+    
+    @Test
+    public void testDefaults() {
+        PackageMessage message = PackageMessage.builder()
+            .build();
+        assertThat(message.getPaths(), notNullValue());
+        assertThat(message.getDeepPaths(), notNullValue());
+        assertThat(message.getMetadata(), notNullValue());
     }
 
     @Test
