@@ -16,6 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.5.0")
+@org.osgi.annotation.versioning.Version("1.6.0")
 package org.apache.sling.distribution.journal;
 

@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling-bundle-parent</artifactId>
-        <version>47</version>
+        <version>49</version>
         <relativePath />
     </parent>
 
@@ -40,7 +40,7 @@
     <description>Implementation of the messages to support Apache Sling Content Distribution on top of an append-only persisted log</description>
 
     <properties>
-        <sling.java.version>8</sling.java.version>
+        <sling.java.version>11</sling.java.version>
         <project.build.outputTimestamp>2024-05-02T17:53:41Z</project.build.outputTimestamp>
     </properties>
 
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.36</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -69,11 +69,13 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.annotation.versioning</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
+            <scope>provided</scope>
             <version>2.0.0</version>
         </dependency>
 

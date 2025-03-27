@@ -16,5 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-@org.osgi.annotation.versioning.Version("1.5.1")
-package org.apache.sling.distribution.journal.messages;
+package org.apache.sling.distribution.journal;
+
+import org.apache.sling.distribution.journal.messages.PackageMessage;
+
+/**
+ * Allows to observe replication processing
+ */
+public interface DistributionCallback {
+	void success(PackageMessage packageMessage);
+	void failure(PackageMessage packageMessage, int numRetries, boolean willDiscard, Exception ex);
+}
