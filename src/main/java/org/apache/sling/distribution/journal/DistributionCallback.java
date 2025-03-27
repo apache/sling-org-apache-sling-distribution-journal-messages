@@ -18,12 +18,15 @@
  */
 package org.apache.sling.distribution.journal;
 
+import java.time.Duration;
+import java.util.Date;
+
 import org.apache.sling.distribution.journal.messages.PackageMessage;
 
 /**
  * Allows to observe replication processing
  */
 public interface DistributionCallback {
-	void success(PackageMessage packageMessage);
-	void failure(PackageMessage packageMessage, int numRetries, boolean willDiscard, Exception ex);
+	void success(PackageMessage packageMessage, long offset, Date createdDate, Duration importuration);
+	void failure(PackageMessage packageMessage, long offset, Date createdDate, int numRetries, boolean willDiscard, Exception ex);
 }
