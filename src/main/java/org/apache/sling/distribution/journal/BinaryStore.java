@@ -18,12 +18,16 @@
  */
 package org.apache.sling.distribution.journal;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 /**
  * Abstraction for storing binaries
  */
+@ProviderType
 public interface BinaryStore {
 
     /**
@@ -36,7 +40,8 @@ public interface BinaryStore {
     InputStream get(String reference) throws IOException;
 
     /**
-     * Return the reference for the
+     * Return the reference for the binary in the binary store
+     *
      * @param id binary identifier
      * @param stream stream to store
      * @param length length of the stream
@@ -44,4 +49,18 @@ public interface BinaryStore {
      * @throws IOException
      */
     String put(String id, InputStream stream, long length) throws IOException;
+
+    /**
+     * Return the reference for the binary in the binary store.
+     *
+     * @param id binary identifier
+     * @param stream stream to store
+     * @param length length of the stream
+     * @param contentType the content type of the stream
+     * @param metadata a map of metadata to assign to the blog
+     * @return
+     * @throws IOException
+     */
+    String put(String id, InputStream stream, long length, String contentType, Map<String, String> metadata) throws IOException;
+
 }
