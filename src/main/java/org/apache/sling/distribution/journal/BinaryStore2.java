@@ -28,13 +28,21 @@ import java.util.Map;
 public interface BinaryStore2 extends BinaryStore {
 
     /**
+     * Verifies that the given reference belongs to this BinaryStore.
+     *
+     * @param reference
+     * @return
+     */
+    boolean verify(String reference);
+
+    /**
      * Return the reference for the binary in the binary store.
      *
-     * @param id binary identifier
-     * @param stream stream to store
-     * @param length length of the stream
+     * @param id          binary identifier
+     * @param stream      stream to store
+     * @param length      length of the stream
      * @param contentType the content type of the stream
-     * @param metadata a map of metadata to assign to the blog
+     * @param metadata    a map of metadata to assign to the blog
      * @return
      * @throws IOException
      */
