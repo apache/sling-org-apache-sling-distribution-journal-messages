@@ -21,11 +21,11 @@ package org.apache.sling.distribution.journal;
 public class HandlerAdapter<T> {
     private final Class<T> type;
     private final MessageHandler<T> handler;
-    
+
     public static <T> HandlerAdapter<T> create(Class<T> type, MessageHandler<T> handler) {
         return new HandlerAdapter<>(type, handler);
     }
-    
+
     private HandlerAdapter(Class<T> type, MessageHandler<T> handler) {
         this.type = type;
         this.handler = handler;
@@ -38,9 +38,10 @@ public class HandlerAdapter<T> {
     public MessageHandler<T> getHandler() {
         return this.handler;
     }
-    
+
     @Override
     public String toString() {
-        return "Message handler for type=" + type.getName() + ", handler=" + handler.getClass().getName();
+        return "Message handler for type=" + type.getName() + ", handler="
+                + handler.getClass().getName();
     }
 }

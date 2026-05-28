@@ -18,9 +18,9 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import lombok.*;
-
 import java.util.*;
+
+import lombok.*;
 
 @Data
 @Builder
@@ -52,7 +52,7 @@ public class PackageMessage {
         INVALIDATE,
         TEST;
     }
-    
+
     public String toString() {
         return toString(true);
     }

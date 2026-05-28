@@ -18,11 +18,11 @@
  */
 package org.apache.sling.distribution.journal;
 
-import org.osgi.annotation.versioning.ProviderType;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Abstraction for storing binaries
@@ -69,6 +69,6 @@ public interface BinaryStore {
      * @return
      * @throws IOException
      */
-    String put(String id, InputStream stream, long length, String contentType, Map<String, String> metadata) throws IOException;
-
+    String put(String id, InputStream stream, long length, String contentType, Map<String, String> metadata)
+            throws IOException;
 }

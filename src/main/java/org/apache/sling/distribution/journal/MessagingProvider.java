@@ -38,16 +38,13 @@ public interface MessagingProvider {
      */
     <T> MessageSender<T> createSender(String topic);
 
-    default Closeable createPoller(
-            String topicName,
-            Reset reset,
-            HandlerAdapter<?> ... adapters) {
+    default Closeable createPoller(String topicName, Reset reset, HandlerAdapter<?>... adapters) {
         return createPoller(topicName, reset, null, adapters);
     }
 
     /**
      * Create a poller which listens to a topic and starts at a given reset or assigned offset.
-     * 
+     *
      * @param topicName name of the topic
      * @param reset fallback in case no assign is given or the assigned offset not valid
      * @param assign opaque implementation dependent assign string (can be null)
@@ -58,7 +55,7 @@ public interface MessagingProvider {
 
     /**
      * Create a poller which listens to a topic and starts at a given reset or assigned offset.
-     * 
+     *
      * @param topicName name of the topic
      * @param reset fallback in case no assign is given or the assigned offset not valid
      * @param assign opaque implementation dependent assign string (can be null)
@@ -67,14 +64,18 @@ public interface MessagingProvider {
      * @param adapters list of listener adapters
      * @return closeable handle of the poller
      */
-    default Closeable createPoller(String topicName, Reset reset, String assign, Map<String, String> filterProperties,
+    default Closeable createPoller(
+            String topicName,
+            Reset reset,
+            String assign,
+            Map<String, String> filterProperties,
             HandlerAdapter<?>... adapters) {
         return createPoller(topicName, reset, assign, adapters);
     }
 
     /**
      * Validate that a topic is suitably set up for the messaging implementation
-     * 
+     *
      * @param topic topic name
      * @throws MessagingException exception in case the topic is not suitable
      */
@@ -82,7 +83,7 @@ public interface MessagingProvider {
 
     /**
      * Retrieve earliest or latest offset for a topic
-     * 
+     *
      * @param topicName name of the topic
      * @param reset latest or earliest
      * @return offset
@@ -92,28 +93,27 @@ public interface MessagingProvider {
     /**
      * Create assign String to feed into poller based on a given offset.
      * The inner format of the assign string is implementation specific.
-     *  
+     *
      * @param offset
      * @return assign String
      */
     String assignTo(long offset);
-    
+
     /**
      * Get assign String to feed into createPoller based on either earliest or latest and a relative offset.
      * The inner format of the assign string is implementation specific.
-     * 
+     *
      * @param reset reference point
      * @param relativeOffset relative offset
      * @return assign String
      */
     String assignTo(Reset reset, long relativeOffset);
-    
+
     /**
      * Return the uri of the messaging system backend.
      * The uri must be unique regarding the validity of per topic offsets.
-     *  
+     *
      * @return uri
      */
     URI getServerUri();
-
 }

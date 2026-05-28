@@ -30,9 +30,8 @@ public interface MessageSender<T> extends Consumer<T> {
     default void accept(T payload) {
         send(payload);
     }
-    
-    void send(T payload) throws MessagingException;
-    
-    void send(T payload, Map<String, String> properties) throws MessagingException;
 
+    void send(T payload) throws MessagingException;
+
+    void send(T payload, Map<String, String> properties) throws MessagingException;
 }

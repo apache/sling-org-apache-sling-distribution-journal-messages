@@ -22,9 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public final class ListPrinter {
-    
-    private ListPrinter() {
-    }
+
+    private ListPrinter() {}
 
     static String print(List<String> list, boolean abbreviate) {
         if (list == null) {
@@ -47,5 +46,4 @@ public final class ListPrinter {
         abbr.append("]");
         return abbr.toString();
     }
-
 }

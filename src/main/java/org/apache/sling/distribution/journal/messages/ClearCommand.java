@@ -28,14 +28,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClearCommand {
-    
+
     // Subscriber agent Sling identifier
     String subSlingId;
-    
+
     // Subscriber agent name
     String subAgentName;
-    
+
     String pubAgentName;
-    
+
     long offset;
 }

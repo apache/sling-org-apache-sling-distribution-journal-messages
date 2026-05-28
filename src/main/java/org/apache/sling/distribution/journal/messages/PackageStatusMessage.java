@@ -54,16 +54,19 @@ public class PackageStatusMessage {
         Status(int number) {
             this.number = number;
         }
-        
+
         public int getNumber() {
             return number;
         }
-        
+
         public static Status fromNumber(int number) {
             switch (number) {
-                case 0: return REMOVED_FAILED;
-                case 1: return REMOVED;
-                case 2: return IMPORTED;
+                case 0:
+                    return REMOVED_FAILED;
+                case 1:
+                    return REMOVED;
+                case 2:
+                    return IMPORTED;
             }
             throw new IllegalStateException("Unknown number " + number);
         }
