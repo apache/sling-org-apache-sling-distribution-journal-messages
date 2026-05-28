@@ -19,10 +19,9 @@
 package org.apache.sling.distribution.journal.messages;
 
 /**
- * Synthetic message create by poller to signal the offset 
+ * Synthetic message create by poller to signal the offset
  * when starting from earliest or latest.
  * This allows the user of the poller to process the offset
  * even if there is no message coming in.
  */
-public class OffsetMessage {
-}
+public class OffsetMessage {}

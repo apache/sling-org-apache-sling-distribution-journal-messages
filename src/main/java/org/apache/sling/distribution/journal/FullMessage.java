@@ -27,13 +27,12 @@ public class FullMessage<T> {
         this.info = info;
         this.message = message;
     }
-    
+
     public MessageInfo getInfo() {
         return info;
     }
-    
+
     public T getMessage() {
         return message;
     }
-
 }

@@ -30,10 +30,10 @@ import lombok.NoArgsConstructor;
 public class SubscriberState {
     // Publisher agent name
     String pubAgentName;
-    
+
     // Last processed offset on the Subscriber agent
     long offset;
-    
+
     // Nb of retries for the current offset on the Subscriber agent
     int retries;
 }

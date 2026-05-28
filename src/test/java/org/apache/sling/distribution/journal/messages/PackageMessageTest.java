@@ -18,10 +18,6 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
@@ -31,10 +27,13 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PackageMessageTest {
 
@@ -44,11 +43,10 @@ public class PackageMessageTest {
         writer.writeValue(outWriter, message);
         return outWriter.getBuffer().toString();
     }
-    
+
     @Test
     public void testDefaults() {
-        PackageMessage message = PackageMessage.builder()
-            .build();
+        PackageMessage message = PackageMessage.builder().build();
         assertThat(message.getPaths(), notNullValue());
         assertThat(message.getDeepPaths(), notNullValue());
         assertThat(message.getMetadata(), notNullValue());
@@ -59,10 +57,10 @@ public class PackageMessageTest {
     public void testSerialize() throws IOException {
         byte[] pkgBinary = "dummy".getBytes();
         PackageMessage message = PackageMessage.builder()
-            .paths(Collections.singletonList("/test"))
-            .pkgBinary(pkgBinary)
-            .metadata(Collections.singletonMap("testMetadataField", "test"))
-            .build();
+                .paths(Collections.singletonList("/test"))
+                .pkgBinary(pkgBinary)
+                .metadata(Collections.singletonMap("testMetadataField", "test"))
+                .build();
         String serialized = serializePackageMessage(message);
         Path path = Paths.get("src/test/resources/serialized.json");
         String expected = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.joining());
@@ -81,5 +79,4 @@ public class PackageMessageTest {
         String expected = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.joining());
         assertThat(serialized, equalTo(expected));
     }
-
 }

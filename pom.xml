@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling-bundle-parent</artifactId>
-        <version>49</version>
+        <version>66</version>
         <relativePath />
     </parent>
 
@@ -39,17 +39,17 @@
     <name>Apache Sling Journal based Content Distribution - Messages bundle</name>
     <description>Implementation of the messages to support Apache Sling Content Distribution on top of an append-only persisted log</description>
 
+    <scm>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</connection>
+        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</developerConnection>
+        <tag>org.apache.sling.distribution.journal.messages-0.5.12</tag>
+        <url>https://github.com/apache/sling-org-apache-sling-distribution-journal-messages.git</url>
+    </scm>
+
     <properties>
         <sling.java.version>11</sling.java.version>
         <project.build.outputTimestamp>2025-05-15T15:15:10Z</project.build.outputTimestamp>
     </properties>
-
-    <scm>
-        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</connection>
-        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-distribution-journal-messages.git</developerConnection>
-        <url>https://github.com/apache/sling-org-apache-sling-distribution-journal-messages.git</url>
-        <tag>org.apache.sling.distribution.journal.messages-0.5.12</tag>
-    </scm>
 
     <!-- ======================================================================= -->
     <!-- D E P E N D E N C I E S -->
@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>osgi.cmpn</artifactId>
+            <artifactId>org.osgi.service.event</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -75,8 +75,8 @@
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <scope>provided</scope>
             <version>2.0.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Test -->

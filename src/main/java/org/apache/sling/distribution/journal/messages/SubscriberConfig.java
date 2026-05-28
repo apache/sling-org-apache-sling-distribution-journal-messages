@@ -33,7 +33,7 @@ public class SubscriberConfig {
     /**
      * The max number of retry attempts to process this package. A value smaller
      * than zero indicates an infinite number of retry attempts. A value greater or
-     * equal to zero indicates a specific number of retry attempts. 
+     * equal to zero indicates a specific number of retry attempts.
      */
     int maxRetries;
 }

@@ -29,6 +29,6 @@ public interface MessageInfo {
     long getOffset();
 
     long getCreateTime();
-    
+
     Map<String, String> getProps();
 }

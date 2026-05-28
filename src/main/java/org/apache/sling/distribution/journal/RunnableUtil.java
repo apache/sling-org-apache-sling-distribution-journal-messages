@@ -23,8 +23,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class RunnableUtil {
 
-    private RunnableUtil() {
-    }
+    private RunnableUtil() {}
 
     public static Thread startBackgroundThread(Runnable runnable, String threadName) {
         Thread thread = new Thread(runnable, threadName);

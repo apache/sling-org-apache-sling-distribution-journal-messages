@@ -19,7 +19,7 @@
 package org.apache.sling.distribution.journal;
 
 // Do not change the enum names. Implementation depends on the exact names.
-public enum Reset { 
-    earliest, // earliest available offset 
-    latest  // latest available offset
+public enum Reset {
+    earliest, // earliest available offset
+    latest // latest available offset
 }

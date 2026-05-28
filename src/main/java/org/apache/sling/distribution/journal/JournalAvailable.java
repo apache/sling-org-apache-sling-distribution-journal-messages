@@ -21,6 +21,4 @@ package org.apache.sling.distribution.journal;
 /**
  * Marker service to signal that the Journal service is available and correctly configured
  */
-public interface JournalAvailable {
-
-}
+public interface JournalAvailable {}

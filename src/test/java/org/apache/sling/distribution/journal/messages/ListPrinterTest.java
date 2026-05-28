@@ -18,15 +18,15 @@
  */
 package org.apache.sling.distribution.journal.messages;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNull;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNull;
 
 public class ListPrinterTest {
     @Test
@@ -51,7 +51,7 @@ public class ListPrinterTest {
         List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");
         assertThat(ListPrinter.print(one, true), equalTo("[/a/path, ... 2 more]"));
     }
-    
+
     @Test
     public void testPrintManyPaths() {
         List<String> one = Arrays.asList("/a/path", "/another/one", "/yet/another/one");

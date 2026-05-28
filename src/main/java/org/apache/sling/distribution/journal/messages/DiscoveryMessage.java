@@ -30,14 +30,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DiscoveryMessage {
-    
+
     // Subscriber agent Sling identifier
     String subSlingId;
-    
+
     // Subscriber agent name
     String subAgentName;
-    
+
     SubscriberConfig subscriberConfiguration;
-    
+
     List<SubscriberState> subscriberStates;
 }

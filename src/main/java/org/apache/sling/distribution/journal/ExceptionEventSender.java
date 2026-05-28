@@ -18,10 +18,10 @@
  */
 package org.apache.sling.distribution.journal;
 
+import javax.annotation.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
