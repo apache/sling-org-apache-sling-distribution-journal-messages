@@ -71,4 +71,17 @@ public interface BinaryStore {
      */
     String put(String id, InputStream stream, long length, String contentType, Map<String, String> metadata)
             throws IOException;
+
+    /**
+     * Return a reference for a binary that was stored with one of the {@code put} methods.
+     * The reference can be used like the one returned by {@code put}: {@link #get(String)} reads the binary
+     * and {@link #verify(String)} returns {@code true} for it. A store that hands out time-limited references,
+     * for example signed URLs, returns a new one with a fresh validity. Implementations are not required to
+     * check that a binary exists for the identifier.
+     *
+     * @param id binary identifier, as passed to {@code put}
+     * @return the reference for the binary
+     * @throws IOException if the reference cannot be created
+     */
+    String getReference(String id) throws IOException;
 }
